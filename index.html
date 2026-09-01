@@ -182,6 +182,12 @@
     box-shadow: var(--shadow-sm); margin-top: 1.4rem;
   }
   .btn:hover { background: var(--color-primary-dark); color: var(--on-primary); }
+  .btn-alt {
+    background: var(--color-bg); color: var(--color-primary);
+    border: 1px solid var(--color-border);
+  }
+  .btn-alt:hover { background: var(--color-section); color: var(--color-primary-dark); border-color: var(--color-primary); }
+  .btn-row { display: flex; flex-wrap: wrap; gap: .75rem; margin: 0; }
 
   /* QR code */
   :root { --qr-fg: #1F3A93; --qr-bg: #FFFFFF; }
@@ -504,7 +510,10 @@
         </div>
       </div>
       <p class="sub">You now have your first connection and your first page to follow. Go.</p>
-      <a class="btn" href="handout.html">Take the checklist with you →</a>
+      <p class="btn-row">
+        <a class="btn" href="handout.html">Take the checklist with you →</a>
+        <a class="btn btn-alt" href="recap.html">Read what we covered →</a>
+      </p>
     </section>
 
   </div>

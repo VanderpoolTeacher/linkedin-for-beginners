@@ -1,0 +1,464 @@
+<title>What We Covered</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+
+<style>
+  :root {
+    --color-primary:      #1F3A93;
+    --color-primary-dark: #16306C;
+    --color-orange:       #EA580C;
+    --color-orange-soft:  #FFF1E9;
+    --color-accent:       #A6A6A6;
+    --color-bg:           #FFFFFF;
+    --color-section:      #F5F7FB;
+    --color-text:         #1A1A1A;
+    --color-muted:        #555555;
+    --color-border:       #E5E7EB;
+    --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --radius-sm: 4px;
+    --radius:    8px;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,.08);
+    --on-primary: #FFFFFF;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --color-primary:      #7C9BEF;
+      --color-primary-dark: #A8BEF7;
+      --color-orange:       #FF8A4C;
+      --color-orange-soft:  #33210F;
+      --color-accent:       #6B7280;
+      --color-bg:           #0E1420;
+      --color-section:      #161E2E;
+      --color-text:         #EDF1F8;
+      --color-muted:        #A2ADC0;
+      --color-border:       #27324A;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,.3);
+      --shadow-md: 0 4px 12px rgba(0,0,0,.45);
+      --on-primary: #0E1420;
+    }
+  }
+  :root[data-theme="dark"] {
+    --color-primary:      #7C9BEF;
+    --color-primary-dark: #A8BEF7;
+    --color-orange:       #FF8A4C;
+    --color-orange-soft:  #33210F;
+    --color-accent:       #6B7280;
+    --color-bg:           #0E1420;
+    --color-section:      #161E2E;
+    --color-text:         #EDF1F8;
+    --color-muted:        #A2ADC0;
+    --color-border:       #27324A;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.3);
+    --shadow-md: 0 4px 12px rgba(0,0,0,.45);
+    --on-primary: #0E1420;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 44rem; margin: 0 auto; padding: clamp(1.5rem, 1rem + 3vw, 3.5rem) clamp(1.15rem, .75rem + 2.5vw, 2rem) 5rem; }
+
+  .backlink { font-size: .875rem; margin: 0 0 2rem; }
+
+  header { border-bottom: 3px solid var(--color-primary); padding-bottom: 1.5rem; margin-bottom: 2.5rem; }
+  .brandline { display: flex; align-items: center; gap: .65rem; margin-bottom: .9rem; }
+  .brandline .bar { width: 2.25rem; height: 3px; background: var(--color-orange); border-radius: var(--radius-sm); flex: none; }
+  .brandline .name { font-size: .75rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--color-primary); }
+
+  h1 { font-size: clamp(2rem, 1.4rem + 2.6vw, 2.9rem); font-weight: 600; letter-spacing: -0.025em; line-height: 1.1; margin: 0; text-wrap: balance; }
+  .dek { color: var(--color-muted); font-size: 1.1rem; margin: .85rem 0 0; }
+  .meta { font-size: .8125rem; color: var(--color-muted); margin: 1.1rem 0 0; }
+
+  h2 {
+    font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2;
+    margin: 3rem 0 .3rem; text-wrap: balance;
+  }
+  h2 .num {
+    display: block; font-size: .72rem; font-weight: 700; letter-spacing: .11em;
+    text-transform: uppercase; color: var(--color-primary); margin-bottom: .45rem;
+  }
+  h3 { font-size: 1.1rem; font-weight: 600; margin: 2rem 0 .4rem; letter-spacing: -0.01em; }
+
+  p { margin: 1rem 0; }
+
+  ul, ol { padding-left: 1.35rem; margin: 1rem 0; }
+  li { margin: .45rem 0; }
+  li::marker { color: var(--color-primary); }
+
+  blockquote {
+    margin: 1.75rem 0;
+    padding: 0 0 0 1.25rem;
+    border-left: 3px solid var(--color-orange);
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.45;
+  }
+  blockquote p { margin: 0; }
+  blockquote p + p { margin-top: .7rem; }
+
+  .callout {
+    background: var(--color-orange-soft);
+    border-left: 4px solid var(--color-orange);
+    border-radius: var(--radius);
+    padding: 1.1rem 1.25rem;
+    margin: 1.75rem 0;
+    font-size: 1rem;
+  }
+  .callout p { margin: 0; }
+  .callout p + p { margin-top: .65rem; }
+  .callout .lbl {
+    display: block; font-size: .7rem; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--color-orange); margin-bottom: .4rem;
+  }
+
+  .box {
+    background: var(--color-section);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1.2rem 1.35rem;
+    margin: 1.75rem 0;
+    font-size: 1rem;
+  }
+  .box p { margin: 0; }
+  .box p + p { margin-top: .7rem; }
+  .box .lbl {
+    display: block; font-size: .7rem; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--color-primary); margin-bottom: .5rem;
+  }
+
+  .scroller { overflow-x: auto; max-width: 100%; margin: 1.5rem 0; -webkit-overflow-scrolling: touch; }
+  table { border-collapse: collapse; width: 100%; min-width: 28rem; font-size: .95rem; }
+  th, td { text-align: left; padding: .65rem 1rem .65rem 0; border-bottom: 1px solid var(--color-border); vertical-align: top; }
+  th { font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--color-muted); font-weight: 600; }
+  td.bad { color: var(--color-muted); text-decoration: line-through; text-decoration-color: var(--color-accent); white-space: nowrap; }
+
+  a { color: var(--color-primary); text-underline-offset: 3px; }
+  a:hover { color: var(--color-primary-dark); }
+  a:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; border-radius: var(--radius-sm); }
+
+  .url { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9em; overflow-wrap: anywhere; }
+
+  .next {
+    border-top: 1px solid var(--color-border);
+    margin-top: 3.5rem; padding-top: 2rem;
+    display: grid; gap: .85rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  }
+  .next a.card {
+    display: block; text-decoration: none; color: var(--color-text);
+    border: 1px solid var(--color-border); border-radius: var(--radius);
+    padding: 1rem 1.15rem; box-shadow: var(--shadow-sm);
+  }
+  .next a.card:hover { border-color: var(--color-primary); }
+  .next .t { font-weight: 600; display: block; color: var(--color-primary); }
+  .next .d { font-size: .875rem; color: var(--color-muted); display: block; margin-top: .2rem; }
+
+  footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--color-border); font-size: .8125rem; color: var(--color-muted); }
+</style>
+
+<div class="wrap">
+
+  <p class="backlink"><a href="index.html">← Back to the slides</a></p>
+
+  <header>
+    <div class="brandline">
+      <span class="bar"></span>
+      <span class="name">Anthony Wayne Innovation &amp; Design</span>
+    </div>
+    <h1>What we covered</h1>
+    <p class="dek">Notes from the LinkedIn session with Junior Achievement's 5th Year program — including the parts that weren't on the slides.</p>
+    <p class="meta">Tuesday, September 1, 2026 · Michael Vanderpool</p>
+  </header>
+
+  <p>The slides are the skeleton. This is what actually got said in the room — the arguments behind each step, the examples that came up, and the questions you asked.</p>
+
+  <h2><span class="num">Where we started</span>What people already think about you</h2>
+
+  <p>Before we opened LinkedIn at all, we talked about the thing you're actually up against. I've spent years talking to people who run businesses, hire people, and work in HR. Here is what a lot of them believe about your generation before they've met you:</p>
+
+  <ul>
+    <li>You can't communicate</li>
+    <li>You might not even show up</li>
+    <li>You don't collaborate well</li>
+    <li>You don't organize your work</li>
+    <li>You can't deal with ambiguity</li>
+    <li>You need to be told exactly what to do at every step</li>
+    <li>You can't figure things out on your own</li>
+  </ul>
+
+  <p><em>Ambiguity</em> means a situation with no clean yes-or-no answer — where the honest response is "it depends," and you have to go find out what it depends on.</p>
+
+  <p>Whether or not any of that is true about you, it's the perception. <em>Forbes</em> published an article saying the same thing. So the job isn't to complain about it.</p>
+
+  <blockquote><p>You have to show up and prove them wrong.</p></blockquote>
+
+  <p>That's the frame for everything else on this page.</p>
+
+  <h2><span class="num">The honest limit</span>A LinkedIn profile will not get you a job</h2>
+
+  <p>Let's be clear about what this tool does and doesn't do. A profile doesn't hire you. A <em>connection</em> can get you in the room — but once you're there you still have to look someone in the eye, shake their hand, and tell a story about a real problem you helped solve.</p>
+
+  <p>LinkedIn is one piece of the puzzle. How you show up everywhere else still counts, and that includes the rest of your accounts. If you're using your real full name on your other platforms, assume someone will look. You may be showing up great for your friends — but how likely is it that your friends are the ones who hire you?</p>
+
+  <h2><span class="num">Before the profile</span>Two things that have nothing to do with LinkedIn</h2>
+
+  <h3>Names</h3>
+
+  <p>I asked everyone's name before we started, on purpose. Learning someone's name is the most basic respect you can offer, and it's how relationships start. But there's a harder, more practical reason:</p>
+
+  <blockquote><p>They can't call your name if they don't know your name.</p></blockquote>
+
+  <p>Somewhere, a person is saying "I met someone who'd be perfect for this" — and if they can't produce your name, the sentence ends there.</p>
+
+  <h3>Bring something to write on</h3>
+
+  <p>Remember what they already assume about you: that you're scrolling and not paying attention. Even when you're genuinely taking notes on your phone, that's what it looks like.</p>
+
+  <p>So bring a notebook and a pen to an interview or a meeting. It flips the script — it makes visible the thing you're actually doing, which is listening and deciding what matters enough to write down.</p>
+
+  <div class="box">
+    <span class="lbl">From the podcast</span>
+    <p>I interviewed a guy who drives a much nicer car than mine and makes considerably more money. When he showed up to record, he had something to write on and something to write with. Model the successful people you can actually observe.</p>
+  </div>
+
+  <h2><span class="num">A detour worth keeping</span>AI, and why being human is about to matter more</h2>
+
+  <p>The room was split on AI — some against, some using it, most somewhere in the middle. Middle is probably the right place. It's a tool. You can build a house with a hammer or hit someone with it.</p>
+
+  <p>Here's the historical argument. The Industrial Revolution made it possible to mass-produce everything, and everything started to look the same. The response was the Arts and Crafts movement — a deliberate return to craftsmanship and the visible human hand.</p>
+
+  <p>My belief, and my hope, is that we're heading into the same swing. As feeds fill up with generated sameness, the human parts get <em>more</em> valuable, not less. I'm already seeing it: more people going to networking events, more face-to-face.</p>
+
+  <div class="callout">
+    <span class="lbl">Which is why</span>
+    <p>Don't run your headshot through AI to "improve" it. Show up as an actual person. Being authentically human is the most valuable thing you can be right now.</p>
+  </div>
+
+  <h2><span class="num">Step 1</span>Look like a real person</h2>
+
+  <p><strong>The photo.</strong> Your face should fill the frame, well lit, on a plain background. Well-lit matters for a reason beyond detail — as humans we notice big things, bright things, high-contrast things. When someone is scrolling, that's what stops them.</p>
+
+  <p>Look like you're happy to be there. People want to talk to people who look glad to be in the room. Not wide-eyed, just <em>interested</em>. And no group photos — nobody should have to guess which one you are.</p>
+
+  <p><strong>The banner</strong> — the wide image behind your photo. You have a lot of latitude here. Something relevant, or honestly even a decent wallpaper or color. What you don't want is empty, because empty reads as unfinished.</p>
+
+  <div class="callout">
+    <span class="lbl">One boundary</span>
+    <p>LinkedIn is social media, but it serves a specific purpose: the business and professional community. Food photos are fine if food is your business. Politics — save it for Facebook.</p>
+  </div>
+
+  <h2><span class="num">Step 2</span>The headline is the whole game</h2>
+
+  <p>The headline is the line under your name. It travels with you — every comment you leave, every search result you appear in, every message you send. It is not your job title.</p>
+
+  <p>Mine is <strong>"Life-long learner with a passion for helping people learn and grow."</strong> If I had to boil my life down to one line, that's it — whether it's my kids, my friends, or someone trying to build something. People message me about that line. It works because my experience section tells the rest of the story.</p>
+
+  <p>If you're stuck, the formula:</p>
+
+  <blockquote><p>What you do + who you do it for + what you're after</p></blockquote>
+
+  <div class="scroller">
+    <table>
+      <thead><tr><th>Instead of</th><th>Try</th></tr></thead>
+      <tbody>
+        <tr><td class="bad">Student</td><td>Design student building brand identities for local businesses</td></tr>
+        <tr><td class="bad">Seeking opportunities</td><td>Studying cybersecurity · looking for a summer internship</td></tr>
+        <tr><td class="bad">Cashier at Kroger</td><td>Customer service and inventory · studying business at Defiance College</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>We wrote a few live in the room. A photographer's became <strong>"Photographer exploring what it means to be human in a world of AI."</strong> Someone managing schedules and people landed on <strong>"Creative problem solver who helps organize work and human resources."</strong> Both are better than a job title because both say what the person is <em>for</em>.</p>
+
+  <div class="callout">
+    <span class="lbl">Two cautions</span>
+    <p><strong>Don't pin yourself geographically</strong> if you want to leave. Your location already shows on your profile. Putting "Northwest Ohio" in the headline tells someone hiring elsewhere that you're not for them.</p>
+    <p><strong>Don't use too many words.</strong> "Looking for a career and searching for fit" says nothing. Be concise, and leave a little flavor.</p>
+  </div>
+
+  <h2><span class="num">Step 3</span>Claim your custom URL</h2>
+
+  <p>LinkedIn hands you a URL ending in a string of gibberish. You can change it, and it takes about thirty seconds — it's in the same place you edit your profile.</p>
+
+  <p>Mine is <a class="url" href="https://www.linkedin.com/in/vanderpoolmichael/" target="_blank" rel="noopener">linkedin.com/in/vanderpoolmichael</a> — reversed, because "michaelvanderpool" was taken.</p>
+
+  <p>Use your actual name, the one that appears on your résumé. Not your gamer tag, not a nickname. Search engines still rely heavily on the words in a URL to understand what a page is about, and you want that page to be understood as <em>you</em>.</p>
+
+  <h2><span class="num">Step 4a</span>About: three short paragraphs</h2>
+
+  <ol>
+    <li><strong>What you're doing now</strong> — what you're studying, where, <em>and why you care.</em> The why tells someone as much as the what.</li>
+    <li><strong>What you've actually done</strong> — with a detail that proves it.</li>
+    <li><strong>What you want next, and how to reach you.</strong> Be specific. Don't be afraid to ask for what you want.</li>
+  </ol>
+
+  <p>Write in first person. Short sentences. Read it out loud — if you'd never say it, don't write it.</p>
+
+  <div class="box">
+    <span class="lbl">Worked example</span>
+    <p>Someone in the room was still figuring out a direction, leaning toward education. That became: <em>"Exploring opportunities in education and trying to learn what roles even exist. If you have ideas, please get in touch."</em></p>
+    <p>Not knowing yet is fine. Say that you're exploring — it's honest and it's a direction.</p>
+  </div>
+
+  <h2><span class="num">Step 4b</span>Experience: use numbers</h2>
+
+  <p>A title and a company name is not enough. Describe the work, and put numbers in it wherever you can — numbers are what catch attention.</p>
+
+  <ul>
+    <li>Washed dishes? <em>"Washed 100 dishes an hour at [restaurant]."</em></li>
+    <li>Retail? <em>"Helped stock a 100,000-square-foot store."</em></li>
+    <li>Ever trained anyone — on the POS, on stocking, on how to talk to a customer? That goes in.</li>
+  </ul>
+
+  <p>Two or three bullets per role. When you list things, odd numbers read best — aim for three, take five if you've got them, and two is fine if two is the truth.</p>
+
+  <h3>You have more experience than you think</h3>
+
+  <ul>
+    <li><strong>Class projects</strong> — especially if you led one. Any time you can honestly use the word <em>led</em>, use it.</li>
+    <li><strong>Clubs and organizations</strong> — and if there isn't one worth joining, starting one is itself the leadership story.</li>
+    <li><strong>Volunteering</strong> — a park cleanup, serving 100 people dinner at a church event.</li>
+    <li><strong>Teams you've played on</strong> — captain or co-captain especially.</li>
+    <li><strong>Freelance work</strong> — contract work rather than a nine-to-five. Shooting someone's senior pictures is freelance work.</li>
+  </ul>
+
+  <h2><span class="num">Step 5a</span>Connections, and who to collect</h2>
+
+  <p>I have just over 6,000 followers. I probably know about a hundred of them personally. That took roughly a decade of consistently showing up — so don't measure today against it.</p>
+
+  <p>Followers can be a vanity metric. A million followers is worthless if five people care what you do. On LinkedIn it's quality over quantity, and quality means <em>relevant</em>. If you're going into botany, connect with botanists. Three reasons:</p>
+
+  <ol>
+    <li>They post when jobs open.</li>
+    <li>They can open a door — you find a job at a company and discover you're already connected to someone there.</li>
+    <li>They talk about their industry. Read that for a few months and you'll have something real to say in an interview.</li>
+  </ol>
+
+  <p>That last one is the sleeper. If your experience is thin, showing up as someone who genuinely follows the industry goes a long way.</p>
+
+  <h3>Follow vs. connect</h3>
+
+  <p><strong>Following</strong> is one-way: you see their posts, they don't know you exist. <strong>Connecting</strong> goes both ways — they can see your stuff too. Big accounts and company pages are often follow-only.</p>
+
+  <h3>Send the note</h3>
+
+  <p>Business people are busy, and the easy answer is always no — because no means less work. Your job is to make yes easy.</p>
+
+  <blockquote><p>"I'm a student studying [X]. I see that you post about [Y] and I'd like to learn more. Can we connect?"</p></blockquote>
+
+  <p>Most people will accept. People like helping students — use that while you have it. And the ones who don't accept: forget them, it happens.</p>
+
+  <h2><span class="num">Step 5b</span>Showing up</h2>
+
+  <p>I post several times a day. I'm not telling you to do that — I have a business and a podcast and a reason. I post so much that people ask if I'm okay when I stop.</p>
+
+  <p>What you should do instead is <strong>comment</strong>. It costs nothing and it works: your comment shows in your own feed, so your profile looks active, and the person you commented on sees your name.</p>
+
+  <ul>
+    <li>Add something real — a question, an experience, a perspective.</li>
+    <li>Two sentences is plenty.</li>
+    <li><strong>"Great post!" is invisible.</strong> Skip it.</li>
+    <li>Don't pick fights or debate people. Not at this stage.</li>
+  </ul>
+
+  <div class="callout">
+    <span class="lbl">The easiest engagement there is</span>
+    <p>When someone comments on or reposts your stuff, <strong>say thank you</strong> — ideally with a sentence about what their comment made you think. They get a notification. Your name lands in front of them again. That's the whole trick.</p>
+  </div>
+
+  <h3>Be strategic, not broad</h3>
+
+  <p>Pick five or six people — in your industry, or with the job you want, or at the company you want — and turn on notifications for them. Then actually interact. That beats casting a wide net.</p>
+
+  <p>You can also go straight at a company. Open its page, click <strong>People</strong>, and search employees by title. You'll see who works there, what they post, and which jobs are open.</p>
+
+  <h3>What to post, if you post</h3>
+
+  <p>Things you're doing or have done — and pictures help. A project board from a science fair. A class you're taking. A workshop you attended. You don't have to be in the photo.</p>
+
+  <p>And share a little of who you are outside of work: birding, rock climbing, whatever it is. Not TikTok-style, but enough to be a person. We connect over work, and we also connect as humans — and you never know what someone else is into.</p>
+
+  <h2><span class="num">Questions from the room</span>The practical stuff</h2>
+
+  <h3>Should I list my phone number?</h3>
+  <p>Leave it off. Nobody's calling you from LinkedIn.</p>
+
+  <h3>Should I turn on "Open to Work"?</h3>
+  <p>I'd skip it. I've never once heard a story where that badge got someone hired, and it can read as "something is wrong here." I know someone who's had it up for five years — and that's the impression it leaves.</p>
+
+  <h3>Should I pay for Premium?</h3>
+  <p>No. Not at this stage.</p>
+
+  <h3>What about the games?</h3>
+  <p>Stay away. I was hooked for about a month. They exist to keep you on the platform so it can sell you things — that's the entire internet, honestly.</p>
+
+  <h3>Should I look at my analytics?</h3>
+  <p>Not yet. If you judge yourself by analytics on day one, you quit on day two, because nobody is watching yet. You don't need everyone to see your stuff. You need the right people to see it.</p>
+
+  <h3>Anything else useful?</h3>
+  <ul>
+    <li><strong>Pin your best work.</strong> The Featured section puts chosen posts at the top.</li>
+    <li><strong>Save your profile as a PDF</strong> — the three dots under your header — and you have a starter résumé.</li>
+    <li><strong>Certifications count.</strong> LinkedIn Learning, and free Google certifications in the tech space, fill gaps when experience is thin.</li>
+  </ul>
+
+  <h2><span class="num">The last thing</span>Follow up. Then follow up again.</h2>
+
+  <p>Everyone is busy. Sending one message and waiting is not trying.</p>
+
+  <p>Send a second. A third if you need to — without becoming a pest. A note like <em>"just bumping this to the top of your inbox, I'd need an answer by Monday"</em> is genuinely helpful, because deadlines make it easy to act. I've been on the receiving end plenty of times, buried under 300 things, and been grateful for the nudge.</p>
+
+  <div class="box">
+    <span class="lbl">Timing</span>
+    <p>Don't send Monday morning — everyone is digging out. Just after lunch is better.</p>
+  </div>
+
+  <p>And the bigger point behind all of it: most people you meet with a professional job got it by <strong>knowing somebody</strong>, not by submitting an application into a void. That's why the network matters.</p>
+
+  <div class="callout">
+    <span class="lbl">Proof, from this session</span>
+    <p>Junior Achievement found me <em>on LinkedIn</em>. We had never met and they didn't have my contact information. They connected, sent a message — and that's why I was standing in that room today. The thing I spent an hour describing is the thing that produced the hour.</p>
+  </div>
+
+  <h2><span class="num">Your move</span>When your profile is ready</h2>
+
+  <p>Send me a message. Lead with a thank you, tell me you've worked on your profile, and ask me to look at it. I'll go through and connect with everyone — and I'm happy to introduce you to people.</p>
+
+  <p>You already made the first connection. That was the point.</p>
+
+  <div class="next">
+    <a class="card" href="index.html">
+      <span class="t">The slides →</span>
+      <span class="d">All 16, in order</span>
+    </a>
+    <a class="card" href="handout.html">
+      <span class="t">The checklist →</span>
+      <span class="d">Six things, printable</span>
+    </a>
+    <a class="card" href="https://www.linkedin.com/in/vanderpoolmichael/" target="_blank" rel="noopener">
+      <span class="t">Connect with me ↗</span>
+      <span class="d">linkedin.com/in/vanderpoolmichael</span>
+    </a>
+    <a class="card" href="https://www.linkedin.com/company/anthony-wayne-innovation-and-design/" target="_blank" rel="noopener">
+      <span class="t">Follow AWID ↗</span>
+      <span class="d">Anthony Wayne Innovation &amp; Design</span>
+    </a>
+  </div>
+
+  <footer>
+    Session notes from the Junior Achievement 5th Year LinkedIn workshop, September 1, 2026.
+    Anthony Wayne Innovation &amp; Design · mvanderpool.com
+  </footer>
+
+</div>

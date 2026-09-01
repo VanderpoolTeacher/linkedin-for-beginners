@@ -6,6 +6,7 @@ Innovation & Design style guide.
 
 - **[The slides](https://vanderpoolteacher.github.io/linkedin-for-beginners/)** — 16 slides, arrow keys or click to advance
 - **[The one-page checklist](https://vanderpoolteacher.github.io/linkedin-for-beginners/handout.html)** — printable
+- **[What we covered](https://vanderpoolteacher.github.io/linkedin-for-beginners/recap.html)** — session notes from the Junior Achievement 5th Year workshop, Sept 1 2026
 
 Live examples used throughout:
 
