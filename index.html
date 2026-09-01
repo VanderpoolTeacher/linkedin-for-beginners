@@ -1,0 +1,526 @@
+<title>LinkedIn for Beginners</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+
+<style>
+  /* ---- AWID brand tokens (from AWID-brand-styleguide.pdf) ---- */
+  :root {
+    --color-primary:      #1F3A93;
+    --color-primary-dark: #16306C;
+    --color-orange:       #EA580C;
+    --color-orange-soft:  #FFF1E9;
+    --color-accent:       #A6A6A6;
+    --color-bg:           #FFFFFF;
+    --color-section:      #F5F7FB;
+    --color-text:         #1A1A1A;
+    --color-muted:        #555555;
+    --color-border:       #E5E7EB;
+    --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --radius-sm: 4px;
+    --radius:    8px;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,.08);
+    --max-width: 1200px;
+    --on-primary: #FFFFFF;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --color-primary:      #7C9BEF;
+      --color-primary-dark: #A8BEF7;
+      --color-orange:       #FF8A4C;
+      --color-orange-soft:  #33210F;
+      --color-accent:       #6B7280;
+      --color-bg:           #0E1420;
+      --color-section:      #161E2E;
+      --color-text:         #EDF1F8;
+      --color-muted:        #A2ADC0;
+      --color-border:       #27324A;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,.3);
+      --shadow-md: 0 4px 12px rgba(0,0,0,.45);
+      --on-primary: #0E1420;
+    }
+  }
+  :root[data-theme="dark"] {
+    --color-primary:      #7C9BEF;
+    --color-primary-dark: #A8BEF7;
+    --color-orange:       #FF8A4C;
+    --color-orange-soft:  #33210F;
+    --color-accent:       #6B7280;
+    --color-bg:           #0E1420;
+    --color-section:      #161E2E;
+    --color-text:         #EDF1F8;
+    --color-muted:        #A2ADC0;
+    --color-border:       #27324A;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.3);
+    --shadow-md: 0 4px 12px rgba(0,0,0,.45);
+    --on-primary: #0E1420;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-size: clamp(1rem, 0.9rem + 0.45vw, 1.15rem);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .deck { min-height: 100svh; display: flex; flex-direction: column; }
+
+  .stage {
+    flex: 1 1 auto;
+    display: grid;
+    place-items: center;
+    padding: clamp(1.5rem, 1rem + 4vw, 4rem) clamp(1.15rem, 0.5rem + 4vw, 3rem);
+  }
+
+  .slide { display: none; width: 100%; max-width: var(--max-width); animation: fade .28s ease-out both; }
+  .slide.is-active { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .slide { animation: none; } }
+
+  .eyebrow {
+    font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--color-primary); margin: 0 0 1rem;
+  }
+
+  h1, h2 { margin: 0; text-wrap: balance; letter-spacing: -0.02em; }
+  h1 { font-size: clamp(2.25rem, 1.3rem + 4.6vw, 3.9rem); font-weight: 600; line-height: 1.08; }
+  h2 { font-size: clamp(1.65rem, 1.15rem + 2.4vw, 2.6rem); font-weight: 700; line-height: 1.14; }
+  h3 { font-size: clamp(1.15rem, 1rem + 0.7vw, 1.6rem); font-weight: 600; margin: 0 0 .35rem; letter-spacing: -0.01em; }
+
+  .sub { color: var(--color-muted); font-size: clamp(1.05rem, .95rem + .6vw, 1.35rem); max-width: 34em; margin: 1.15rem 0 0; }
+
+  .divider { height: 3px; width: 4rem; background: var(--color-primary); border: 0; margin: 1.35rem 0 1.75rem; border-radius: var(--radius-sm); }
+
+  ul.points { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem; max-width: 46em; }
+  ul.points li { display: grid; grid-template-columns: 1.6rem 1fr; gap: .75rem; align-items: start; }
+  ul.points li .n {
+    width: 1.6rem; height: 1.6rem; border-radius: var(--radius-sm);
+    background: var(--color-primary); color: var(--on-primary);
+    font-size: .8125rem; font-weight: 700;
+    display: grid; place-items: center; margin-top: .18rem;
+  }
+  ul.points strong { font-weight: 600; }
+
+  ul.checks { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: .85rem; max-width: 44em; }
+  ul.checks li { display: grid; grid-template-columns: 1.35rem 1fr; gap: .8rem; align-items: start; }
+  ul.checks li::before { content: "☐"; color: var(--color-primary); font-size: 1.2rem; line-height: 1.25; }
+
+  .grid { display: grid; gap: 1.15rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); margin-top: .5rem; }
+
+  .card {
+    background: var(--color-bg); border: 1px solid var(--color-border);
+    border-radius: var(--radius); box-shadow: var(--shadow-sm);
+    padding: 1.25rem 1.35rem;
+  }
+  .card.tint { background: var(--color-section); }
+
+  .callout {
+    background: var(--color-orange-soft);
+    border-left: 4px solid var(--color-orange);
+    border-radius: var(--radius);
+    padding: 1.1rem 1.3rem;
+    max-width: 44em;
+    margin-top: 1.5rem;
+  }
+  .callout .label {
+    font-size: .75rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--color-orange); display: block; margin-bottom: .35rem;
+  }
+  .callout p { margin: 0; }
+
+  .example {
+    background: var(--color-section);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1.2rem 1.35rem;
+    max-width: 44em;
+    margin-top: 1.4rem;
+  }
+  .example .who {
+    font-size: .75rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--color-primary); display: block; margin-bottom: .6rem;
+  }
+  .quote { font-size: clamp(1.1rem, 1rem + .6vw, 1.45rem); font-weight: 500; margin: 0; letter-spacing: -0.01em; }
+  .attr { color: var(--color-muted); font-size: .9375rem; margin: .6rem 0 0; }
+
+  .stats { display: flex; flex-wrap: wrap; gap: clamp(1.5rem, 1rem + 3vw, 3.25rem); margin-top: 1.5rem; }
+  .stat .n { display: block; font-size: clamp(2.1rem, 1.4rem + 3.4vw, 3.25rem); font-weight: 700; line-height: 1; letter-spacing: -0.03em; color: var(--color-primary); font-variant-numeric: tabular-nums; }
+  .stat .lbl { display: block; font-size: .8125rem; color: var(--color-muted); margin-top: .5rem; max-width: 11rem; }
+  .stat .up { color: var(--color-orange); font-weight: 600; }
+
+  .scroller { overflow-x: auto; max-width: 100%; -webkit-overflow-scrolling: touch; margin-top: 1rem; }
+  table { border-collapse: collapse; width: 100%; min-width: 30rem; }
+  th, td { text-align: left; padding: .7rem 1rem .7rem 0; border-bottom: 1px solid var(--color-border); vertical-align: top; }
+  th { font-size: .75rem; letter-spacing: .09em; text-transform: uppercase; color: var(--color-muted); font-weight: 600; }
+
+  .bad { color: var(--color-muted); text-decoration: line-through; text-decoration-color: var(--color-accent); }
+
+  .url {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    background: var(--color-section); border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm); padding: .12em .45em; font-size: .9em;
+    overflow-wrap: anywhere;
+  }
+
+  a { color: var(--color-primary); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  a:hover { color: var(--color-primary-dark); }
+  a:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; border-radius: var(--radius-sm); }
+  a.url { display: inline-block; text-decoration: none; }
+  a.url:hover { border-color: var(--color-primary); }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: var(--color-primary); color: var(--on-primary);
+    border-radius: var(--radius); padding: .7rem 1.15rem;
+    font-weight: 600; font-size: .9375rem; text-decoration: none;
+    box-shadow: var(--shadow-sm); margin-top: 1.4rem;
+  }
+  .btn:hover { background: var(--color-primary-dark); color: var(--on-primary); }
+
+  /* title slide */
+  .title-slide { text-align: left; }
+  .brandline { display: flex; align-items: center; gap: .75rem; margin-bottom: 2rem; }
+  .brandline .bar { width: 2.75rem; height: 4px; background: var(--color-orange); border-radius: var(--radius-sm); }
+  .brandline .name { font-size: .9375rem; font-weight: 600; letter-spacing: .02em; color: var(--color-primary); }
+
+  /* nav bar */
+  .bar-nav {
+    border-top: 1px solid var(--color-border);
+    background: var(--color-bg);
+    padding: .7rem clamp(1.15rem, .5rem + 4vw, 3rem);
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  }
+  .bar-nav .label { font-size: .8125rem; color: var(--color-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .nav { display: flex; align-items: center; gap: .5rem; }
+  .nav button {
+    font-family: inherit; font-size: 1rem; line-height: 1;
+    background: var(--color-bg); color: var(--color-text);
+    border: 1px solid var(--color-border); border-radius: var(--radius);
+    padding: .55rem .85rem; cursor: pointer;
+  }
+  .nav button:hover:not(:disabled) { border-color: var(--color-primary); color: var(--color-primary); }
+  .nav button:disabled { opacity: .35; cursor: default; }
+  .nav button:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+  .counter { font-size: .8125rem; color: var(--color-muted); min-width: 4rem; text-align: center; font-variant-numeric: tabular-nums; }
+
+  .hint { font-size: .8125rem; color: var(--color-muted); margin-top: 2.5rem; }
+</style>
+
+<div class="deck" id="deck">
+  <div class="stage">
+
+    <!-- 1 -->
+    <section class="slide is-active" data-label="Welcome">
+      <div class="title-slide">
+        <div class="brandline">
+          <span class="bar"></span>
+          <span class="name">Anthony Wayne Innovation &amp; Design</span>
+        </div>
+        <h1>LinkedIn, from zero.</h1>
+        <p class="sub">A profile that works, in one afternoon. Everything here is shown on two real pages you can go look at when we're done.</p>
+        <p class="hint">Use ← → to move through. Click anywhere to advance.</p>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="slide" data-label="Why bother">
+      <p class="eyebrow">Why bother</p>
+      <h2>People are looking you up. Right now.</h2>
+      <hr class="divider">
+      <p class="sub" style="margin-top:0">Before an interview, before a coffee, before saying yes to you — someone types your name into a search bar. LinkedIn is usually the first result.</p>
+      <div class="callout">
+        <span class="label">The real point</span>
+        <p>You don't control whether people search for you. You control what they find.</p>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="slide" data-label="Roadmap">
+      <p class="eyebrow">What we'll do</p>
+      <h2>Five things, in order</h2>
+      <hr class="divider">
+      <ul class="points">
+        <li><span class="n">1</span><span><strong>Look like a person.</strong> Photo, banner, location.</span></li>
+        <li><span class="n">2</span><span><strong>Say what you're about.</strong> The headline is the whole game.</span></li>
+        <li><span class="n">3</span><span><strong>Claim your address.</strong> Custom URL, thirty seconds.</span></li>
+        <li><span class="n">4</span><span><strong>Fill in the story.</strong> About and Experience.</span></li>
+        <li><span class="n">5</span><span><strong>Show up.</strong> Connect, comment, post.</span></li>
+      </ul>
+    </section>
+
+    <!-- 4 -->
+    <section class="slide" data-label="Photo">
+      <p class="eyebrow">Step 1</p>
+      <h2>The photo is not optional</h2>
+      <hr class="divider">
+      <div class="grid">
+        <div class="card">
+          <h3>Do</h3>
+          <p style="margin:0;color:var(--color-muted)">Your face filling most of the frame. Good light. Plain background. Look at the camera. A phone is fine.</p>
+        </div>
+        <div class="card">
+          <h3>Don't</h3>
+          <p style="margin:0;color:var(--color-muted)">Group photos. Sunglasses. A cropped wedding picture. The default grey silhouette.</p>
+        </div>
+        <div class="card tint">
+          <h3>Banner</h3>
+          <p style="margin:0;color:var(--color-muted)">The wide image behind your photo. Empty blue says "I stopped halfway." Anything relevant beats nothing.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="slide" data-label="Headline">
+      <p class="eyebrow">Step 2 · The most important line</p>
+      <h2>Your headline follows you everywhere</h2>
+      <hr class="divider">
+      <p class="sub" style="margin-top:0">It rides along with every comment, every search result, every message you send. It is not your job title.</p>
+      <div class="example">
+        <span class="who">Live example · <a href="https://www.linkedin.com/in/vanderpoolmichael/" target="_blank" rel="noopener">linkedin.com/in/vanderpoolmichael ↗</a></span>
+        <p class="quote">“Life-long learner with a passion for helping people learn and grow”</p>
+        <p class="attr">No job title. No company. It says what he's <em>for</em> — and it reads the same whether he's teaching, consulting, or running a podcast.</p>
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section class="slide" data-label="Headline formula">
+      <p class="eyebrow">Step 2 · If you're stuck</p>
+      <h2>A formula that always works</h2>
+      <hr class="divider">
+      <p class="quote" style="max-width:22em">What you do <span style="color:var(--color-accent)">+</span> who you do it for <span style="color:var(--color-accent)">+</span> what you're after</p>
+      <div class="scroller">
+        <table>
+          <thead><tr><th>Instead of</th><th>Try</th></tr></thead>
+          <tbody>
+            <tr><td class="bad">Student</td><td>Design student building brand identities for local businesses</td></tr>
+            <tr><td class="bad">Seeking opportunities</td><td>Studying cybersecurity · looking for a summer internship in Northwest Ohio</td></tr>
+            <tr><td class="bad">Cashier at Kroger</td><td>Customer service and inventory · studying business at Defiance College</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 7 -->
+    <section class="slide" data-label="Custom URL">
+      <p class="eyebrow">Step 3 · Thirty seconds</p>
+      <h2>Claim your own address</h2>
+      <hr class="divider">
+      <p class="sub" style="margin-top:0">LinkedIn hands you a URL with random numbers on the end. You can change it once, to your name.</p>
+      <div class="example">
+        <span class="who">Live example</span>
+        <p style="margin:0"><a class="url" href="https://www.linkedin.com/in/vanderpoolmichael/" target="_blank" rel="noopener">linkedin.com/in/vanderpoolmichael ↗</a></p>
+        <p class="attr">Clean enough to put on a résumé, an email signature, or a business card. <strong>Edit public profile &amp; URL</strong> — top right of your profile.</p>
+      </div>
+    </section>
+
+    <!-- 8 -->
+    <section class="slide" data-label="About">
+      <p class="eyebrow">Step 4</p>
+      <h2>About: three short paragraphs</h2>
+      <hr class="divider">
+      <ul class="points">
+        <li><span class="n">1</span><span><strong>What you're doing now.</strong> Studying what, where, why it interests you.</span></li>
+        <li><span class="n">2</span><span><strong>What you've actually done.</strong> A project, a job, a club — with a detail that proves it.</span></li>
+        <li><span class="n">3</span><span><strong>What you want next,</strong> and how to reach you.</span></li>
+      </ul>
+      <div class="callout">
+        <span class="label">Write it like this</span>
+        <p>First person. Short sentences. Read it out loud — if you'd never say it, don't write it.</p>
+      </div>
+    </section>
+
+    <!-- 9 -->
+    <section class="slide" data-label="Experience">
+      <p class="eyebrow">Step 4 · Experience</p>
+      <h2>Describe the work, not the title</h2>
+      <hr class="divider">
+      <div class="grid">
+        <div class="card">
+          <h3 style="color:var(--color-muted)">Thin</h3>
+          <p style="margin:0;color:var(--color-muted)">Server — Applebee's<br>May 2025 – present</p>
+        </div>
+        <div class="card">
+          <h3 style="color:var(--color-primary)">Better</h3>
+          <p style="margin:0;color:var(--color-muted)">Server — Applebee's<br>May 2025 – present<br><br>Handle 15–20 tables a shift in a high-volume dining room. Train new servers on POS and opening procedure.</p>
+        </div>
+      </div>
+      <div class="callout">
+        <span class="label">Everything counts</span>
+        <p>Class projects, volunteering, clubs, a team you play on, freelance work. If you did it and learned from it, it goes on.</p>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section class="slide" data-label="Connections">
+      <p class="eyebrow">Step 5</p>
+      <h2>Connections are the whole engine</h2>
+      <hr class="divider">
+      <p class="sub" style="margin-top:0">Nothing you post reaches anyone until people are connected to you. Build the network first.</p>
+      <div class="stats">
+        <div class="stat"><span class="n">6,111</span><span class="lbl">followers on Michael's profile</span></div>
+        <div class="stat"><span class="n">500+</span><span class="lbl">connections</span></div>
+      </div>
+      <p class="attr">Built over years, one person at a time. Start with everyone you already know: classmates, professors, coworkers, family friends.</p>
+    </section>
+
+    <!-- 11 -->
+    <section class="slide" data-label="The note">
+      <p class="eyebrow">Step 5 · Connecting</p>
+      <h2>Always add the note</h2>
+      <hr class="divider">
+      <p class="sub" style="margin-top:0">A blank request is a coin flip. Two sentences makes it almost automatic.</p>
+      <div class="example">
+        <span class="who">Copy this shape</span>
+        <p class="quote" style="font-size:1.1rem;font-weight:400;line-height:1.55">“Hi [name] — we met at the Junior Achievement workshop today. I'm studying [x] at [school] and would like to stay connected.”</p>
+      </div>
+      <div class="callout">
+        <span class="label">Why it works</span>
+        <p>It answers the only question they have: <em>who are you and how do I know you?</em></p>
+      </div>
+    </section>
+
+    <!-- 12 -->
+    <section class="slide" data-label="Engaging">
+      <p class="eyebrow">Step 5 · The easy part</p>
+      <h2>Commenting beats posting</h2>
+      <hr class="divider">
+      <p class="sub" style="margin-top:0">You don't have to write anything original to be visible. A real comment on someone else's post puts your name and headline in front of their entire network.</p>
+      <ul class="checks" style="margin-top:1.5rem">
+        <li>Add something — a question, an experience, a disagreement</li>
+        <li>Two sentences is plenty</li>
+        <li>“Great post!” is invisible. Skip it.</li>
+      </ul>
+    </section>
+
+    <!-- 13 -->
+    <section class="slide" data-label="AWID page">
+      <p class="eyebrow">A real page, real numbers</p>
+      <h2>What showing up looks like</h2>
+      <hr class="divider">
+      <p class="sub" style="margin-top:0"><a href="https://www.linkedin.com/company/anthony-wayne-innovation-and-design/" target="_blank" rel="noopener">Anthony Wayne Innovation &amp; Design ↗</a> — a small page in Whitehouse, Ohio. Posting a few times a week about local business and the Make It Happen podcast.</p>
+      <div class="stats">
+        <div class="stat"><span class="n">636</span><span class="lbl">post impressions, last 7 days <span class="up">↑ 37%</span></span></div>
+        <div class="stat"><span class="n">28</span><span class="lbl">search appearances <span class="up">↑ 40%</span></span></div>
+        <div class="stat"><span class="n">369</span><span class="lbl">total followers</span></div>
+      </div>
+      <div class="callout">
+        <span class="label">The takeaway</span>
+        <p>369 followers is not a big number. It still put 636 impressions on the board in a week — because the page posted consistently. Small and steady works.</p>
+      </div>
+    </section>
+
+    <!-- 14 -->
+    <section class="slide" data-label="What to post">
+      <p class="eyebrow">If you want to post</p>
+      <h2>You already have things to say</h2>
+      <hr class="divider">
+      <div class="grid">
+        <div class="card tint"><h3>Something you made</h3><p style="margin:0;color:var(--color-muted)">A project, a design, a paper you're proud of. Show the work.</p></div>
+        <div class="card tint"><h3>Something you learned</h3><p style="margin:0;color:var(--color-muted)">A class, a workshop, a mistake. What surprised you?</p></div>
+        <div class="card tint"><h3>Somewhere you went</h3><p style="margin:0;color:var(--color-muted)">An event, a tour, a talk. Who did you meet and what stuck?</p></div>
+      </div>
+      <p class="attr">Today counts. You are at a workshop right now.</p>
+    </section>
+
+    <!-- 15 -->
+    <section class="slide" data-label="Checklist">
+      <p class="eyebrow">Before you leave today</p>
+      <h2>Six boxes</h2>
+      <hr class="divider">
+      <ul class="checks">
+        <li>Upload a real photo</li>
+        <li>Rewrite your headline using the formula</li>
+        <li>Claim your custom URL</li>
+        <li>Write three paragraphs in About</li>
+        <li>Add one experience with a real description</li>
+        <li>Send ten connection requests — with notes</li>
+      </ul>
+      <div class="callout">
+        <span class="label">Then</span>
+        <p>Leave one comment a week. That's the entire ongoing commitment.</p>
+      </div>
+    </section>
+
+    <!-- 16 -->
+    <section class="slide" data-label="Connect">
+      <p class="eyebrow">Start here</p>
+      <h2>Connect with me — and add the note</h2>
+      <hr class="divider">
+      <div class="grid">
+        <div class="card">
+          <h3>Michael Vanderpool</h3>
+          <p style="margin:0"><a class="url" href="https://www.linkedin.com/in/vanderpoolmichael/" target="_blank" rel="noopener">linkedin.com/in/vanderpoolmichael ↗</a></p>
+        </div>
+        <div class="card">
+          <h3>Anthony Wayne Innovation &amp; Design</h3>
+          <p style="margin:0"><a class="url" href="https://www.linkedin.com/company/anthony-wayne-innovation-and-design/" target="_blank" rel="noopener">linkedin.com/company/anthony-wayne-innovation-and-design ↗</a></p>
+        </div>
+      </div>
+      <p class="sub">You now have your first connection and your first page to follow. Go.</p>
+      <a class="btn" href="handout.html">Take the checklist with you →</a>
+    </section>
+
+  </div>
+
+  <div class="bar-nav">
+    <span class="label" id="label">Welcome</span>
+    <div class="nav">
+      <button type="button" id="prev" aria-label="Previous slide">←</button>
+      <span class="counter" id="counter">1 / 16</span>
+      <button type="button" id="next" aria-label="Next slide">→</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var slides  = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+    var counter = document.getElementById('counter');
+    var label   = document.getElementById('label');
+    var prevBtn = document.getElementById('prev');
+    var nextBtn = document.getElementById('next');
+    var i = 0;
+
+    function show(n) {
+      i = Math.max(0, Math.min(slides.length - 1, n));
+      slides.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
+      counter.textContent = (i + 1) + ' / ' + slides.length;
+      label.textContent = slides[i].dataset.label || '';
+      prevBtn.disabled = (i === 0);
+      nextBtn.disabled = (i === slides.length - 1);
+      window.scrollTo(0, 0);
+    }
+
+    prevBtn.addEventListener('click', function (e) { e.stopPropagation(); show(i - 1); });
+    nextBtn.addEventListener('click', function (e) { e.stopPropagation(); show(i + 1); });
+
+    document.addEventListener('click', function (e) {
+      if (e.target.closest('button, a, .scroller')) return;
+      show(i + 1);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); show(i + 1); }
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); show(i - 1); }
+      else if (e.key === 'Home') { show(0); }
+      else if (e.key === 'End') { show(slides.length - 1); }
+    });
+
+    var x0 = null;
+    document.addEventListener('touchstart', function (e) { x0 = e.changedTouches[0].clientX; }, { passive: true });
+    document.addEventListener('touchend', function (e) {
+      if (x0 === null) return;
+      var dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 55) { show(dx < 0 ? i + 1 : i - 1); }
+      x0 = null;
+    }, { passive: true });
+
+    show(0);
+  })();
+</script>
